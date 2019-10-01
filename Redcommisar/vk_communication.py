@@ -21,7 +21,7 @@ def found_class(forms_file, text):
 
 """ feedback - ответ на сообщения """
 def feedback(longpoll, vk, user_id, text):
-    #try:
+    try:
         # Список классов
         try:
             with open(forms_file, 'r', encoding='UTF-8') as f:
@@ -210,9 +210,9 @@ def feedback(longpoll, vk, user_id, text):
                 keyboard=json.dumps(keyboard_main)
             ) 
             
-    #except:
-        #logs.error_log(feedback.__name__, [longpoll, vk, user_id, text], 'Unknow error.')
-    #return False 
+    except:
+        logs.error_log(feedback.__name__, [longpoll, vk, user_id, text], 'Unknow error.')
+    return False 
 
 
 
@@ -239,6 +239,7 @@ def vk_connection(token):
             # Если после пересоеденения остались сообщения, обработать их
             if len(save_message):
                 feedback(longpoll, vk, save_message[0], save_message[1])
+                save_message = []
 
             # Прослушка
             while True:

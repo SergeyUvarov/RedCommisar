@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup, SoupStrainer
+from requests_html import HTMLSession
 import requests
 import time
 
@@ -14,11 +14,15 @@ def search_files_on_site(website_url, file_formats):
             return False
         
         files_list = []
+        links = []
         # Подключение к сайту
-        resources = requests.get(website_url, headers = { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0' })
-        soup = BeautifulSoup(resources.content, 'html.parser', parse_only=SoupStrainer('a'))
+        
+        session = HTMLSession()
+        resources = session.get(website_url)
+
         # Получение всех ссылок на сайте
-        links = [link['href'] for link in soup if link.has_attr('href')]
+        links = resources.html.absolute_links
+        
         # Поиск всех файлов с подходящими расширениеми
         for link in links:
             for file_format in file_formats:
@@ -28,13 +32,12 @@ def search_files_on_site(website_url, file_formats):
         if not files_list:
             logs.error_log(search_files_on_site.__name__, [website_url, file_formats], "No files found.", [links])
             return False
-        print(files_list)
         return files_list
 
     except ConnectionError:
         logs.error_log(search_files_on_site.__name__, [website_url, file_formats], "Unable to connect to server.")
-    #except:
-        #logs.error_log(search_files_on_site.__name__, [website_url, file_formats], "Unknow error.")
+    except:
+        logs.error_log(search_files_on_site.__name__, [website_url, file_formats], "Unknow error.")
     return False
 
 
@@ -101,7 +104,7 @@ def get_date(file_name):
 
 """ get_suitable_files_url - выдаёт список URL файлов с актуальным расписанием """
 def get_suitable_files_url(website_url, file_formats):
-    #try:
+    try:
         # База данных c расписанием в формате '[URL, дата, ID]'
         mini_base = []
         # Расписание на сегодня
@@ -110,7 +113,6 @@ def get_suitable_files_url(website_url, file_formats):
         current_date_id = time_parcer.get_now_date_id()
         # Все URL файлов с расписанием
         all_files_url = search_files_on_site(website_url, file_formats)
-        time.sleep(5)
         if not all_files_url:
             logs.error_log(get_suitable_files_url.__name__, [website_url, file_formats], "Required files not found.")
             return False
@@ -160,8 +162,11 @@ def get_suitable_files_url(website_url, file_formats):
         for file in mini_base:
             if file[2] == lower[2]:
                 future_files.append(file)
+                
         return future_files
     
-    #except:
-        #logs.error_log(get_suitable_files_url.__name__, [website_url, file_formats], "Unknow error.")
-    #return False
+    except:
+        logs.error_log(get_suitable_files_url.__name__, [website_url, file_formats], "Unknow error.")
+    return False
+
+#print(search_files_on_site('https://s11028.edu35.ru/2013-06-12-15-17-31/raspisanie', ['.xls']))

@@ -69,10 +69,10 @@ def excel_parcer(output_file, temp, date):
 """ loader - производит загрузку расписания в удобном формате """
 def loader(output_file, temp_file, website_url, file_formats):
     while True:
-        #try:
+        try:
             # Данные о расписании
             files = school_website_parcer.get_suitable_files_url(website_url, file_formats)
-            time.sleep(1)
+            time.sleep(5)
             # Загрузка
             for file in files:
                 load = requests.get(file[0])
@@ -81,7 +81,6 @@ def loader(output_file, temp_file, website_url, file_formats):
                 excel_parcer(output_file, temp_file, files[0][1])
                 logs.log(file[0] + ' loaded')
 
-        #except:
-            #logs.error_log(loader.__name__, [output_file, temp_file, website_url, file_formats], 'Unknow error.')
-            time.sleep(1*60)
-
+        except:
+            logs.error_log(loader.__name__, [output_file, temp_file, website_url, file_formats], 'Unknow error.')
+        time.sleep(5*60)

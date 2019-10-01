@@ -1,6 +1,6 @@
 import threading, time
 
-import vk_communication, loader
+import vk_communication, loader, school_website_parcer
 
 main_token = "4ccef41dfe9ecc1cf815552f0e994b4652b1b7b84be3b1f88c3e308f05321dcad56af5157f51f6cebd6e0"
 
