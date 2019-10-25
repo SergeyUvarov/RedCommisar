@@ -98,4 +98,4 @@ def loader(output_file, temp_file, website_url, file_formats):
 
         except:
             logs.error_log(loader.__name__, [output_file, temp_file, website_url, file_formats], 'Unknow error.')
-        time.sleep(5*60)
+        time.sleep(60)
