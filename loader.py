@@ -44,7 +44,7 @@ def excel_parcer(output_file, temp, date):
         
         #Время уроков
         col = 2
-        row = 1
+        row = 2
         lessons = []
         if int(sheet.row_values(3)[1]) == 1:
             lessons.append('Время 1')
@@ -52,9 +52,10 @@ def excel_parcer(output_file, temp, date):
             lessons.append('Время 2')
             
 	# Поиск времени уроков
-        while row < sheet.nrows-2:
-            row+=2
-            lessons.append(sheet.row_values(row)[col])
+        while row < sheet.nrows-1:
+            row+=1
+            if sheet.row_values(row)[col]:
+                lessons.append(sheet.row_values(row)[col])
         classes.append(lessons)
 
         col = 3
@@ -64,11 +65,12 @@ def excel_parcer(output_file, temp, date):
             if sheet.row_values(row)[col]:
                 lessons = []
                 lessons.append(sheet.row_values(row)[col].lower())
-                row=1
+                row=2
                 # Поиск уроков
-                while row < sheet.nrows-2:
-                    row+=2
-                    lessons.append(sheet.row_values(row)[col].title())
+                while row < sheet.nrows-1:
+                    row+=1
+                    if sheet.row_values(row)[col]:
+                        lessons.append(sheet.row_values(row)[col].title())
                 classes.append(lessons)
                 
             col += 1
