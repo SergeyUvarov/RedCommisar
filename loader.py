@@ -60,17 +60,16 @@ def excel_parcer(output_file, temp, date):
 
         col = 3
         while col < sheet.ncols:
+            row=2
             # Поиск классов
-            row = 2
             if sheet.row_values(row)[col]:
                 lessons = []
                 lessons.append(sheet.row_values(row)[col].lower())
-                row=2
+                row=1
                 # Поиск уроков
-                while row < sheet.nrows-1:
-                    row+=1
-                    if sheet.row_values(row)[col]:
-                        lessons.append(sheet.row_values(row)[col].title())
+                while row < sheet.nrows-2:
+                    row+=2
+                    lessons.append(sheet.row_values(row)[col].title())
                 classes.append(lessons)
                 
             col += 1
