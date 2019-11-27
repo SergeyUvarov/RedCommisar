@@ -20,7 +20,7 @@ def found_class(forms_file, text):
 
 
 """ feedback - ответ на сообщения """
-def feedback(longpoll, vk, user_id, text):
+def feedback(longpoll, vk, user_id, text, eve=0):
     try:
         # Список классов
         try:
@@ -238,8 +238,9 @@ def feedback(longpoll, vk, user_id, text):
         elif 'specfor11a' in text.lower():
             vk.messages.send(
                 user_id=user_id,
+                attachment=vk_api_funcs.pxxx(),
                 random_id=random.getrandbits(64),
-                message='Скоро...\n',
+                message='Держи шалунишка ;)\n',
             )
 
         elif found_class(forms, text.lower()):
@@ -361,7 +362,7 @@ def vk_connection(token):
                             # Сохранение сообщения на всякий случай
                             save_message = [user_id, text]
                             # Реакция на сообщение
-                            feedback(longpoll, vk, user_id, text)
+                            feedback(longpoll, vk, user_id, text, element)
                             # Всё хорошо, резервное сообщение больше не нужно
                             save_message = []
 

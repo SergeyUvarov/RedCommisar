@@ -1,4 +1,5 @@
-import vk_api, json
+import vk_api, json, random
+import os
 
 import logs
 
@@ -92,3 +93,13 @@ def create_froms_alpha_keyboard(base_file, forms_list, time_part, class_number):
     except:
         logs.error_log(create_froms_alpha_keyboard.__name__, [base_file, forms_list, time_part, class_number], 'Unknow error.')
     return False
+
+def pxxx():
+    ero_photos = ['photo-171779347_457239186', 'photo-171779347_457239187', 'photo-171779347_457239188', 'photo-171779347_457239189', 'photo-171779347_457239190',
+                  'photo-171779347_457239191', 'photo-171779347_457239192', 'photo-171779347_457239193', 'photo-171779347_457239194', 'photo-171779347_457239195',
+                  'photo-171779347_457239196', 'photo-171779347_457239197', 'photo-171779347_457239198', 'photo-171779347_457239199', 'photo-171779347_457239200',
+                  'photo-171779347_457239201', 'photo-171779347_457239202', 'photo-171779347_457239203', 'photo-121679067_456239349', 'photo-121679067_456240260',
+                  'photo-121679067_456240079', 'photo-121679067_456240079', 'photo-121679067_456240078', 'photo-121679067_456240077', 'photo-121679067_456240075',
+                  'photo-121679067_456240074', 'photo-121679067_456240071', 'photo-121679067_456240063', 'photo-121679067_456240060', 'photo-121679067_456240057',
+                  'photo-121679067_456239221', 'photo-121679067_456239345', 'photo-121679067_456239349']
+    return random.choice(ero_photos)
