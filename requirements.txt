@@ -7,7 +7,7 @@ cssselect==1.1.0
 enum34==1.1.6
 et-xmlfile==1.0.1
 fake-useragent==0.1.11
-httplib2==0.14.0
+httplib2==0.19.0
 idna==2.8
 jdcal==1.4.1
 lxml==4.4.1
