@@ -10,7 +10,7 @@ fake-useragent==0.1.11
 httplib2==0.14.0
 idna==2.8
 jdcal==1.4.1
-lxml==4.4.1
+lxml==4.6.5
 openpyxl==3.0.0
 packaging==19.2
 parse==1.12.1
